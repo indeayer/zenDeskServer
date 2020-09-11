@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS ZenDeskApp;
+USE ZenDeskApp;
+CREATE TABLE IF NOT EXISTS userdata(
+   id INT NOT NULL AUTO_INCREMENT,
+   username VARCHAR(30) NOT NULL,
+   first_name VARCHAR(30) NOT NULL,
+   last_name VARCHAR(30) NOT NULL,
+
+   PRIMARY KEY(id)
+);
+

@@ -1,20 +1,20 @@
 const http = require('http')
 const express = require('express')
 const app = express()
-const port = 8080
+const port = 8100
 const mysql = require('mysql')
 
 // Get the Host from Environment or use default
 const host = process.env.DB_HOST || 'localhost';
 
 // Get the User for DB from Environment or use default
-const user = process.env.DB_USER || 'ZenAdmin';
+const user = process.env.DB_USER || 'ZenUser';
 
 // Get the Password for DB from Environment or use default
 const password = process.env.DB_PASS || '@*ePEk3SwiYu&=oVuPhi';
 
 // Get the Database from Environment or use default
-const database = process.env.DB_DATABASE || 'ZENDESK_APP';
+const database = process.env.DB_DATABASE || 'ZenDeskApp';
 
 // Create the connection with required details
 const con = mysql.createConnection({

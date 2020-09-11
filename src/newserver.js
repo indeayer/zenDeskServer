@@ -7,9 +7,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "ZenAdmin",
+  port: "8100",
+  user: "ZenUser",
   password: "@*ePEk3SwiYu&=oVuPhi",
-  database: "ZENDESK_APP",
+  database: "ZenDeskApp"
 });
 
 con.connect(function (err) {
