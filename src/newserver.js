@@ -4,14 +4,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
-
 var con = mysql.createConnection({
-  host: "localhost",
-  port: "8100",
+  host: "ZenDeskDB",
+  port: "3306",
   user: "ZenUser",
   password: "@*ePEk3SwiYu&=oVuPhi",
   database: "ZenDeskApp"
 });
+
+
 
 con.connect(function (err) {
   if (err) throw err;
