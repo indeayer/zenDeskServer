@@ -1,9 +1,15 @@
+fs = require('fs');
 var mysql = require("mysql");
+const winston = require('winston');
 var arrayToTable = require("array-to-table");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const logger = require("./config/winston.js");
+
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
 var con = mysql.createConnection({
   host: "ZenDeskDB",
   port: "3306",
@@ -12,48 +18,50 @@ var con = mysql.createConnection({
   database: "ZenDeskApp"
 });
 
-
-
 con.connect(function (err) {
   if (err) throw err;
-  console.log("Connected!");
-});
+}); 
 
-//API CALL SECTION (POST AND SET)
+//Query CALL SECTION (POST AND SET)
 
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
+  logger.log('info',"Connected Server");
+  res.sendFile(__dirname + "/index.html"); //If User go default link divert to index.html
 });
 
-app.get("/lists", (req, res) => {
+//Get function to search for username.
+app.get("/get", (req, res) => {  
   const reqQueryObject = req.query;
   const username = req.query.username;
-  con.query(`SELECT * FROM userdata`, function (err, result, fields) {
-    if (result.length == 0) {
-      res.send(`USER NOT FOUND`);
+  
+  //Promise when reject shows error , when approve call function.
+  function searchForUser(){
+    return new Promise(function (resolve, reject){
+      console.log(username);
+      con.query(`SELECT * FROM userdata where username='${username}'`,
+      function (err, result ,fields){
+        if (err){
+          return reject (err);
+        }
+        resolve(result);
+      }
+      );
+    });
+  };
+  
+  //Function call (rows = result of data)
+  searchForUser().then(function(rows){
+    if (rows.length == 0){
+      res.send ("User not Found");
     } else {
-      let userslist = arrayToTable(result);
-      res.send(`<pre>${userslist}</pre>`);
+      return res.send (`Name: ${rows[0].first_name} ${rows[0].last_name}`)
     }
-  });
+  }, function( errorMessage) {
+    console.log(errorMessage);
+  })
 });
 
-app.get("/get", (req, res) => {
-  const reqQueryObject = req.query;
-  const username = req.query.username;
-  con.query(`SELECT * FROM userdata where username='${username}'`, function (
-    err,
-    result,
-    fields
-  ) {
-    if (result.length == 0) {
-      res.send(`USER NOT FOUND`);
-    } else {
-      var data = result[0];
-      res.send("Name: " + data.first_name + " " + data.last_name);
-    }
-  });
-});
+
 
 app.post("/set", (req, res) => {
   const reqQueryObject = req.body; // returns object with all parameters
@@ -61,26 +69,22 @@ app.post("/set", (req, res) => {
   const name = req.body.name;
   const lastname = req.body.lastname;
 
-  // check if the username is exist, if yes, response says it's exist otherwise it will perform insert.
-  function findExistingRecords() {
-    return new Promise(function (resolve, reject) {
-      // async
-      if ("got error" == true) {
-        return reject("Connection issue");
-      }
-      return resolve("4");
-    });
-  }
+  // // check if the username is exist, if yes, response says it's exist otherwise it will perform insert.
+  // function findExistingRecords() {
+  //   return new Promise(function (resolve, reject) {
+  //     // async
+  //     if ("got error" == true) {
+  //       return reject("Connection issue");
+  //     }
+  //     return resolve("4");
+  //   });
+  // }
   
   function findExistingRecords(){
-
-    //function findExistingRecords() {
     return new Promise(function (resolve, reject) {
       con.query(
         `SELECT * FROM userdata where username = '${username}'`,
         function (err, result, fields) {
-          // Call reject on error states,
-          // call resolve with results
           if (err) {
             return reject(err);
           }
@@ -89,8 +93,9 @@ app.post("/set", (req, res) => {
       );
     });
   };
+  
   findExistingRecords().then(function (rows) {
-    // if empty rows found, meant safe to insert
+    // if empty rows found, Insert User
     if (rows.length === 0) {
       con.query(
         `INSERT INTO userdata (username, first_name, last_name) VALUES ('${username}', '${name}', '${lastname}')`,
@@ -107,41 +112,8 @@ app.post("/set", (req, res) => {
   }, function( errorMessage) {
     console.log(errorMessage);
   });
-
-  //console.log(results);
-  /*
-  con.query(
-    "SELECT * FROM userdata where username  ='" + username + "'",
-    function (err, result, fields) {
-      console.log(result);
-
-      var data = result[0];
-
-      console.log(data.username.length);
-
-      if (data.username.length != 0) {
-        res.send("USER ID ALREADY EXISTS");
-      } else if (username == "" || name == "" || lastname == "") {
-        console.log(result);
-      } else {
-        var sql =
-          "INSERT INTO userdata (username, first_name, last_name) VALUES ('" +
-          username +
-          "', '" +
-          name +
-          "', '" +
-          lastname +
-          "')";
-        con.query(sql, function (err, result) {
-          if (err) throw err;
-          res.send("Username: " + username + "was inserted");
-        });
-      }
-    }
-  );
-  */
 });
-
+  
 var server = app.listen(8081, function () {
   var host = server.address().address;
   var port = server.address().port;

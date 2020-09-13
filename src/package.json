@@ -1,20 +1,22 @@
 {
   "name": "src",
   "version": "1.0.0",
-  "description": "",
+  "description": "Docker App V1",
   "main": "newserver.js",
   "dependencies": {
     "array-to-table": "^1.0.1",
     "express": "^4.17.1",
+    "log4js": "^6.3.0",
     "mysql": "^2.18.1",
     "pm2": "^4.4.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "winston": "^3.3.3"
   },
   "devDependencies": {},
   "scripts": {
     "pm2": "pm2 start process.json --no-daemon",
     "start": "node ./",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test/test.js",
     "migrate": "node ./newserver.js"
   },
   "repository": {
