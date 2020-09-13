@@ -21,10 +21,10 @@ services:
         - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - '8600:3306'
+      - '8500:3306'
     expose:
       - '3306' 
-      - '8600'
+      - '8500'
 
   webapp:
     command: ["./wait-for-it.sh", "-t" , "30" , "ZenDeskDB:3306", "--", "npm","run","pm2"]
@@ -37,10 +37,10 @@ services:
       -  webserver:/var/www/html
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - '8081:8081' 
+      - '8400:8400' 
     expose:
       # Opens port 3306 on the container
-      - '8081'
+      - '8400'
       - '3306'
       # Where our data will be persisted
       # networks:
@@ -53,7 +53,7 @@ services:
     depends_on:
       - webapp
     ports:
-      - '8500:80'
+      - '8600:80'
     volumes:
       -  webserver:/var/www/html
       -  ./src/nginx-conf:/etc/nginx/conf.d
@@ -61,8 +61,8 @@ services:
       # Opens port 3306 on the container
       - '80'
       - '3306'
-      - '8081'
-      - '8500'
+      - '8400'
+      - '8600'
   #   # networks:
   #   #   - app-network
 

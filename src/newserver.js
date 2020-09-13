@@ -72,21 +72,12 @@ app.get("/get", (req, res) => {
 
 
 app.post("/set", (req, res) => {
-  const reqQueryObject = req.body; // returns object with all parameters
+  const reqQueryObject = req.body; // request HTML body queries
   const username = req.body.username;
   const name = req.body.name;
   const lastname = req.body.lastname;
-  log_it(req, "POST", "/set", `Create new username '${username}'`);
-  // // check if the username is exist, if yes, response says it's exist otherwise it will perform insert.
-  // function findExistingRecords() {
-  //   return new Promise(function (resolve, reject) {
-  //     // async
-  //     if ("got error" == true) {
-  //       return reject("Connection issue");
-  //     }
-  //     return resolve("4");
-  //   });
-  // }
+  log_it(req, "POST", "/set", `Create new username '${username}'`); // Logging of Set
+  
   
   function findExistingRecords(){
     return new Promise(function (resolve, reject) {
@@ -122,7 +113,7 @@ app.post("/set", (req, res) => {
   });
 });
   
-var server = app.listen(8081, function () {
+var server = app.listen(8400, function () {
   var host = server.address().address;
   var port = server.address().port;
   console.log("Example app listening at http://%s:%s", host, port);

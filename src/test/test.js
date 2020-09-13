@@ -8,7 +8,7 @@ const last_name = "Star";
 
 var con = mysql.createConnection({
   host: "localhost",
-  port: "8600",
+  port: "8500",
   user: "ZenUser",
   password: "@*ePEk3SwiYu&=oVuPhi",
   database: "ZenDeskApp",
@@ -57,23 +57,5 @@ describe("#database function()", function () {
         assert.ok(true);
       };
     });
-    //console.log("(TEST USER DATA WILL BE DELETED AFTER PASS)");
   });
 });
-
-// if (DeleteUser == 'Y') {
-// con.query(
-//   `DELETE FROM userdata WHERE username = '${username}'`,
-//   function (err, result) {
-//     if (err) throw err;
-//     DeleteUser = 'N'
-//     return console.log("DELETE TEST USER : COMPLETED");
-//   }
-// );
-// }
-
-// var server = app.listen(8082, function () {
-//   var host = server.address().address;
-//   var port = server.address().port;
-//   console.log("DATABASE Docker is listening at http://%s:%s", host, port);
-// });

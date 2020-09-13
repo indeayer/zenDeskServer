@@ -6,5 +6,5 @@ COPY src/ .
 RUN chown -R zenmaster:zenmaster /src
 USER zenmaster
 RUN npm install
-EXPOSE 8081 80 8500
+EXPOSE 8600 80 8500 8400
 # CMD [ "npm", "run" , "pm2"]
