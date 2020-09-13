@@ -1,4 +1,10 @@
-fs = require('fs');
+var fs = require('fs');
+
+fs.open('mynewfile2.txt', 'w', function (err, file) {
+  if (err) throw err;
+  console.log('Saved!');
+});
+  
 var mysql = require("mysql");
 const winston = require('winston');
 var arrayToTable = require("array-to-table");
@@ -22,12 +28,15 @@ con.connect(function (err) {
   if (err) throw err;
 }); 
 
+
+
 //Query CALL SECTION (POST AND SET)
 
 app.get("/", function (req, res) {
   logger.log('info',"Connected Server");
   res.sendFile(__dirname + "/index.html"); //If User go default link divert to index.html
 });
+
 
 //Get function to search for username.
 app.get("/get", (req, res) => {  
@@ -60,7 +69,6 @@ app.get("/get", (req, res) => {
     console.log(errorMessage);
   })
 });
-
 
 
 app.post("/set", (req, res) => {
