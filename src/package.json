@@ -7,16 +7,18 @@
     "array-to-table": "^1.0.1",
     "express": "^4.17.1",
     "log4js": "^6.3.0",
+    "mocha": "^8.1.3",
     "mysql": "^2.18.1",
     "pm2": "^4.4.1",
     "sequelize": "^6.3.5",
+    "simple-node-logger": "^18.12.24",
     "winston": "^3.3.3"
   },
   "devDependencies": {},
   "scripts": {
     "pm2": "pm2 start process.json --no-daemon",
     "start": "node ./",
-    "test": "node test/test.js",
+    "test": " ./node_modules/mocha/bin/mocha test",
     "migrate": "node ./newserver.js"
   },
   "repository": {

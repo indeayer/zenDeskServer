@@ -1,17 +1,12 @@
-var fs = require('fs');
-
-fs.open('mynewfile2.txt', 'w', function (err, file) {
-  if (err) throw err;
-  console.log('Saved!');
-});
-  
 var mysql = require("mysql");
-const winston = require('winston');
+const log = require('simple-node-logger').createSimpleLogger('log/app.log');
+//const winston = require('winston');
 var arrayToTable = require("array-to-table");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const logger = require("./config/winston.js");
+log.setLevel('trace');
+//const logger = require("./config/winston.js");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -29,24 +24,29 @@ con.connect(function (err) {
 }); 
 
 
+function log_it(req, method, url, message){
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  log.info(`${ip} - - [${new Date().toJSON()}] "${method} ${url} - - ${message}"`);
+}
 
 //Query CALL SECTION (POST AND SET)
 
 app.get("/", function (req, res) {
-  logger.log('info',"Connected Server");
+  log_it(req, "GET", "/", "Connected to index.html");
   res.sendFile(__dirname + "/index.html"); //If User go default link divert to index.html
 });
 
 
 //Get function to search for username.
 app.get("/get", (req, res) => {  
+  
   const reqQueryObject = req.query;
   const username = req.query.username;
-  
+  log_it(req, "GET", "/get", `Search username '${username}'`);
   //Promise when reject shows error , when approve call function.
   function searchForUser(){
     return new Promise(function (resolve, reject){
-      console.log(username);
+      //log.info('Connected to server at ', new Date().toJSON());
       con.query(`SELECT * FROM userdata where username='${username}'`,
       function (err, result ,fields){
         if (err){
@@ -76,7 +76,7 @@ app.post("/set", (req, res) => {
   const username = req.body.username;
   const name = req.body.name;
   const lastname = req.body.lastname;
-
+  log_it(req, "POST", "/set", `Create new username '${username}'`);
   // // check if the username is exist, if yes, response says it's exist otherwise it will perform insert.
   // function findExistingRecords() {
   //   return new Promise(function (resolve, reject) {
