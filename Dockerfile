@@ -7,13 +7,14 @@ ARG UID=1000
 ARG PW=docker
 
 RUN mkdir -p /src
-WORKDIR /home/zenmaster/src
+WORKDIR /usr/zenmaster/src
+
 # RUN adduser --disabled-password zenmaster // old config
 # RUN useradd -ms /bin/bash zenmaster
 RUN useradd -m ${USER} && echo "${USER}:${PW}" | \chpasswd
 COPY src/ .
-RUN chown -R ${USER}:${USER} /home/zenmaster/
-USER ${USER}
 RUN npm install
+RUN chown -R ${USER}:${USER} /usr/zenmaster/
+USER ${USER}
 EXPOSE 8600 80 8500 8400
 CMD [ "npm", "run" , "pm2"]
