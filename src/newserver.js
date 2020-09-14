@@ -118,5 +118,6 @@ app.post("/set", (req, res) => {
 var server = app.listen(8400, function () {
   var host = server.address().address;
   var port = server.address().port;
-  console.log("Example app listening at http://%s:%s", host, port);
+  console.log("App is ready!!!!");
+  // console.log("Example app listening at http://%s:%s", host, port);
 });
