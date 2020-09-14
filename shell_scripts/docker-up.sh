@@ -10,5 +10,5 @@ sleep 5
 printf '\Booting docker-compose up..\n\n'
 sleep 5
 cd ..
-docker-compose up
+docker-compose up -d
 printf '\nDocker Compose up successfully\n\n'

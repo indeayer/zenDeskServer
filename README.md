@@ -1,26 +1,28 @@
 # zenDeskServer
 zenDeskServer (CentOS 7, MacBook , EC2 Linux AMI2)
-
 Deployed using Dockers.
 Project Software : (NodeJS , Dockers)
 
-For Other Info -- find at page end
+For other info , find at page end
 
 How to Deploy:
  Requirements: Docker must be installed.
  If Docker not install (Run Docker install shell command)
- If docker ready skip this step 1.
+
+ If DOCKER ready skip step 1.
 
  Go into root/shell_scripts
  1) run command:
      - ./dockerinstall.sh
+      -After install suggest reboot 
 
-2) git clone https://github.com/indeayer/zenDeskServer.git 
-3) run: (shell folder)
+ 2) git clone https://github.com/indeayer/zenDeskServer.git 
+
+ 3) run: (shell folder)
     ./docker-up.sh 
 or: 
 -go to root folder
-run# docker-compose up 
+run: docker-compose up 
 
 (---- Installation done and Setup done ----)
 
@@ -38,7 +40,7 @@ Option 1:
 
 Option 2:
 1) cd to shell_scripts 
-2) /.test_script.sh
+2) ./test_script.sh
 
 
 Test Folder located "src/test"
