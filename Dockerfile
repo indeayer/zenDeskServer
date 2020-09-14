@@ -16,4 +16,4 @@ RUN chown -R ${USER}:${USER} /home/zenmaster/
 USER ${USER}
 RUN npm install
 EXPOSE 8600 80 8500 8400
-# CMD [ "npm", "run" , "pm2"]
+CMD [ "npm", "run" , "pm2"]

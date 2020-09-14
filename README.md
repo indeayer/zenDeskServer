@@ -64,8 +64,11 @@ mysql -s -h 127.0.0.1 --port=8500 -u ZenUser -p
 
 
 Dockers Port Details 
+
 -APP SERVER PORT: 8400
+
 -DB SERVER PORT : 8500
+
 -NGIX SERVER PORT : 8600
 
 Port mapped to 8400 beyond to prevent localhost software crash.
