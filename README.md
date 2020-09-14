@@ -1,21 +1,13 @@
 # zenDeskServer
-zenDeskServer
+zenDeskServer (CentOS 7, MacBook , EC2)
 
 Deployed using Dockers.
-Tested on EC2 , Localhost
-
 Project Software : (NodeJS , Dockers)
 
-Dockers Port Details 
-APP SERVER PORT: 8400
-DB SERVER PORT : 8500
-NGIX SERVER PORT : 8600
-
-Port mapped to 8400 beyond to prevent localhost software crash.
+For Other Info -- find at page end
 
 How to Deploy:
-
-Requirements: Docker must be installed.
+ Requirements: Docker must be installed.
  If Docker not install (Run Docker install shell command)
  If docker ready skip this step 1.
 
@@ -59,12 +51,24 @@ Test Folder located "src/test"
 Logs files of set and get store at container (web_app)
 
 Command:
-docker exec -it web_app /bin/bash
-cd /src/log
-tail logs 
+#docker exec -it web_app /bin/bash
+#cd /src/log
+#tail app.logs 
 
 
 Login to Database:
 Username: ZenUser
 Password: 
 mysql -s -h 127.0.0.1 --port=8500 -u ZenUser -p
+
+
+
+Dockers Port Details 
+APP SERVER PORT: 8400
+DB SERVER PORT : 8500
+NGIX SERVER PORT : 8600
+
+Port mapped to 8400 beyond to prevent localhost software crash.
+
+Environment tested on: EC2 , Centos
+
