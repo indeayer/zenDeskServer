@@ -1,4 +1,5 @@
 #!/bin/sh
 
-cd ../src
+cd ..
+cd src
 npm test
