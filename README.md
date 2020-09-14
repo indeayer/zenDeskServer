@@ -1,5 +1,5 @@
 # zenDeskServer
-zenDeskServer (CentOS 7, MacBook , EC2)
+zenDeskServer (CentOS 7, MacBook , EC2 Linux AMI2)
 
 Deployed using Dockers.
 Project Software : (NodeJS , Dockers)
@@ -16,12 +16,11 @@ How to Deploy:
      - ./dockerinstall.sh
 
 2) git clone https://github.com/indeayer/zenDeskServer.git 
-3) go to "ZENDESKSERVER"
-4) type:
-    docker-compose up 
-
-or:
-    run ./docker-up.sh (shell folder)
+3) run: (shell folder)
+    ./docker-up.sh 
+or: 
+-go to root folder
+run# docker-compose up 
 
 (---- Installation done and Setup done ----)
 
