@@ -76,7 +76,7 @@ app.post("/set", (req, res) => {
   const username = req.body.username;
   const name = req.body.name;
   const lastname = req.body.lastname;
-  log_it(req, "POST", "/set", `Create new username '${username}'`); // Logging of Set
+
   
   
   function findExistingRecords(){
@@ -96,6 +96,7 @@ app.post("/set", (req, res) => {
   findExistingRecords().then(function (rows) {
     // if empty rows found, Insert User
     if (rows.length === 0) {
+      log_it(req, "POST", "/set", `Create new username '${username}'`); // Logging of Set
       con.query(
         `INSERT INTO userdata (username, first_name, last_name) VALUES ('${username}', '${name}', '${lastname}')`,
         function (err, result, fields) {
@@ -104,6 +105,7 @@ app.post("/set", (req, res) => {
         }
       );
     } else {
+      log_it(req, "GET", "/post", `Create user failed , existing records: '${username}'`);
       return res.send(
         `Creation failure. The username: "${username}" was exist.`
       );
