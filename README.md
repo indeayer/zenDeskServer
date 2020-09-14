@@ -51,9 +51,9 @@ Test Folder located "src/test"
 Logs files of set and get store at container (web_app)
 
 Command:
-#docker exec -it web_app /bin/bash
-#cd /src/log
-#tail app.logs 
+-docker exec -it web_app /bin/bash
+-cd /src/log
+-tail app.logs 
 
 
 Login to Database:
@@ -64,9 +64,9 @@ mysql -s -h 127.0.0.1 --port=8500 -u ZenUser -p
 
 
 Dockers Port Details 
-APP SERVER PORT: 8400
-DB SERVER PORT : 8500
-NGIX SERVER PORT : 8600
+-APP SERVER PORT: 8400
+-DB SERVER PORT : 8500
+-NGIX SERVER PORT : 8600
 
 Port mapped to 8400 beyond to prevent localhost software crash.
 
