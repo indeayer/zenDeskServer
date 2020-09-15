@@ -41,6 +41,7 @@ localhost:8600
 How to Unit Test:
 
 (If facing any issue in unit testing, can be resolve by installing nodeJS and running npm install)
+
 Option 1:
 1) cd to 'src' folder 
 
@@ -69,6 +70,7 @@ Command:
 Login to Database:
 Username: ZenUser
 Password: 
+
 mysql -s -h 127.0.0.1 --port=8500 -u ZenUser -p
 
 
