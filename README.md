@@ -8,6 +8,7 @@ For other info , find at page end
 How to Deploy:
  Requirements: Docker must be installed.
  If Docker not install (Run Docker install shell command)
+ 
 
  If DOCKER ready skip step 1.
 
@@ -19,10 +20,15 @@ How to Deploy:
  2) git clone https://github.com/indeayer/zenDeskServer.git 
 
  3) run: (shell folder)
+
     ./docker-up.sh 
+
 or: 
 -go to root folder
+
 run: docker-compose up 
+
+
 
 (---- Installation done and Setup done ----)
 
@@ -33,8 +39,11 @@ Access Application via Nginx:
 localhost:8600 
 
 How to Unit Test:
+
+(If facing any issue in unit testing, can be resolve by installing nodeJS and running npm install)
 Option 1:
 1) cd to 'src' folder 
+
 2) run 
    "npm test"
 
