@@ -67,14 +67,6 @@ Command:
 -tail app.logs 
 
 
-Login to Database:
-Username: ZenUser
-Password: 
-
-mysql -s -h 127.0.0.1 --port=8500 -u ZenUser -p
-
-
-
 Dockers Port Details 
 
 -APP SERVER PORT: 8400
